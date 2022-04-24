@@ -2,7 +2,7 @@ import path, { dirname } from 'path'
 import express from 'express'
 import * as dotenv from 'dotenv'
 import { create } from 'express-handlebars'
-import static_routes from './routes/static_routes.js'
+import routes from './routes/index.js'
 import { fileURLToPath } from 'url'
 
 dotenv.config()
@@ -15,12 +15,14 @@ const hbs = create({
   extname: '.hbs'
 })
 
+// hbs.registerPartial('auth_form')
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.engine('.hbs', hbs.engine)
 app.set('view engine', '.hbs')
 app.set('views', './views')
 
-app.use(static_routes)
+app.use(routes)
 
 app.listen(PORT, () => console.log(`Up and running! Listening on http://localhost:${PORT}`))
