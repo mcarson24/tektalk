@@ -38,4 +38,14 @@ const signup = (req, res) => {
   res.redirect('/')
 }
 
-export default { login, signup }
+const logout = async (req, res) => {
+  if (req.session.user) {
+    req.session.destroy(() => {
+      res.redirect('/')
+    })
+  } else {
+    res.status(404).end()
+  }
+}
+
+export default { login, signup, logout }
