@@ -1,9 +1,30 @@
 import User from "../models/User.js"
 
-const login = (req, res) => {
+const login = async (req, res) => {
   if (!req.body.username || !req.body.password) return res.redirect('/login')
+  try {
+    // Find the user by the username
+    const user = await User.findOne({ where: { username: req.body.username }})
 
-  res.end()
+    if (!user) {
+      res.redirect('/login')
+    
+    }
+    // Compare the password with the hashed password stored for that user
+    const valid = await user.isValid(req.body.password)
+    if (!valid) {
+      res.redirect('/login')
+    }
+
+    // If they match log in user (save in session)
+    req.session.save(() => {
+      req.session.user = user
+      return res.redirect('/')
+    })
+  } catch (err) {
+    console.log('got here')
+    // res.status(500).json(err)
+  }
 }
 
 const signup = (req, res) => {
@@ -17,4 +38,14 @@ const signup = (req, res) => {
   res.redirect('/')
 }
 
-export default { login, signup }
+const logout = async (req, res) => {
+  if (req.session.user) {
+    req.session.destroy(() => {
+      res.redirect('/')
+    })
+  } else {
+    res.status(404).end()
+  }
+}
+
+export default { login, signup, logout }
