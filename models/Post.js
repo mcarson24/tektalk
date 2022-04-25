@@ -18,7 +18,7 @@ Post.init({
     type: DataTypes.TEXT,
     allowNull: false
   }
-  // TODO: Ass user_id as foreign key.
+  // TODO: Add user_id as foreign key.
 }, {
   sequelize
 })
