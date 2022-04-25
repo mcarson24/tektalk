@@ -13,6 +13,7 @@ const login = async (req, res) => {
     // Compare the password with the hashed password stored for that user
     const valid = await user.isValid(req.body.password)
     if (!valid) {
+      // TODO: Send flash message with validation errors.
       res.redirect('/login')
     }
 
@@ -22,23 +23,26 @@ const login = async (req, res) => {
       return res.redirect('/')
     })
   } catch (err) {
-    console.log('got here')
-    // res.status(500).json(err)
+    res.status(500).json(err)
   }
 }
 
 const signup = async (req, res) => {
-  if (!req.body.username || !req.body.password) return res.redirect('/signup')
+  try {
+    if (!req.body.username || !req.body.password) return res.redirect('/signup')
 
-  const user = await User.create({
-    username: req.body.username,
-    password: req.body.password
-  })
-  // TODO: Log in new user, save logged in user to the session, redirect to dashboard page.
-  req.session.save(() => {
-    req.session.user = user
-    res.redirect('/')
-  })
+    const user = await User.create({
+      username: req.body.username,
+      password: req.body.password
+    })
+    req.session.save(() => {
+      req.session.user = user
+      res.redirect('/')
+    })
+  } catch (err) {
+    // TODO: Send flash message with validation errors.
+    res.redirect('/signup')
+  }
 }
 
 const logout = async (req, res) => {
