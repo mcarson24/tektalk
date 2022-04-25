@@ -27,15 +27,18 @@ const login = async (req, res) => {
   }
 }
 
-const signup = (req, res) => {
+const signup = async (req, res) => {
   if (!req.body.username || !req.body.password) return res.redirect('/signup')
 
-  User.create({
+  const user = await User.create({
     username: req.body.username,
     password: req.body.password
   })
   // TODO: Log in new user, save logged in user to the session, redirect to dashboard page.
-  res.redirect('/')
+  req.session.save(() => {
+    req.session.user = user
+    res.redirect('/')
+  })
 }
 
 const logout = async (req, res) => {
