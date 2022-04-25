@@ -1,8 +1,15 @@
 <div>
-  {{#if user}}
-    {{> logout}}
-  {{else}}
-    <a href="/login">Log In</a>
-    <a href="/signup">Sign Up</a>
-  {{/if}}
+  {{#if posts}}
+    <ul>
+      {{#each posts as |post| }}
+        <li>
+          <h2>
+            <a href="/posts/{{post.id}}">{{post.title}}</a>
+          </h2>
+        </li>
+      {{/each}}
+    </ul>
+    {{else}}
+      <p>We haven't published any posts yet.</p>
+    {{/if}}
 </div>
