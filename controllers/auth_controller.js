@@ -36,7 +36,7 @@ const signup = async (req, res) => {
       password: req.body.password
     })
     req.session.save(() => {
-      req.session.user = user
+      req.session.user = user.get({ plain: true})
       res.redirect('/')
     })
   } catch (err) {
