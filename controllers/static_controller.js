@@ -1,7 +1,12 @@
-import Post from '../models/Post.js'
+import { Post, User } from '../models/index.js'
 
 const home = async (req, res) => {
-  const posts = await Post.findAll()
+  const posts = await Post.findAll({
+    include: {
+      model: User,
+      as: 'user'
+    }
+  })
   console.log(posts)
   res.render('static/home', { 
     user: req.session.user,

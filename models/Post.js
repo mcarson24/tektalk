@@ -17,8 +17,15 @@ Post.init({
   body: {
     type: DataTypes.TEXT,
     allowNull: false
+  },
+  user_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'users',
+      key: 'id'
+    }
   }
-  // TODO: Add user_id as foreign key.
 }, {
-  sequelize
+  sequelize,
+  modelName: 'posts'
 })

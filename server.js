@@ -23,7 +23,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: connection
+    db: connection,
+    // table: 'sessions' // C'mon lets all embrace the lowercaseness.
   })
 }))
 
