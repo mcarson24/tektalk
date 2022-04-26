@@ -12,11 +12,13 @@
     <header>
       <nav class="flex justify-end">
         <div>
+          <a href="/" class="mr-3">Home</a>
+          <a href="/dashboard" class="mr-3">Dashboard</a>
           {{#if user}}
             {{> logout}}
           {{else}}
-            <a href="/login">Log In</a>
-            <a href="/signup">Sign Up</a>
+            <a href="/login" class="mr-3">Log In</a>
+            <a href="/signup" class="mr-3">Sign Up</a>
           {{/if}}
         </div>
       </nav>
