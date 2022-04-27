@@ -24,7 +24,12 @@ const hbs = create({
   extname: '.hbs',
   helpers: {
     readable_time: date => dayjs().to(dayjs(date)),
-    format_time: date => dayjs(date).format('dddd, MMMM Do, YYYY')
+    format_time: date => dayjs(date).format('dddd, MMMM Do, YYYY'),
+    if_user_owns_post: (one, two, options) => {
+      console.log(options)
+      return (one === two) ? options.fn(this) : options.inverse(this)
+    },
+    post_edit_path: post => `/posts/${post.id}/edit`
   }
 })
 

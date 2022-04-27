@@ -4,9 +4,14 @@
   <section>
     {{#each user.posts as |post| }}
       <div class="flex">
-        <h3>{{post.title}}</h3>
+        <h3>
+          <a href="/posts/{{post.id}}">{{post.title}}</a>
+        </h3>
         <h4 class="italic ml-3">{{readable_time post.createdAt}}</h4>
       </div>
+      {{#if_user_owns_post post.user.id post.user_id}}
+        <a href="/posts/{{post.id}}/edit">Edit Post</a>
+      {{/if_user_owns_post}}
     {{/each}}
   </section>
   <section>

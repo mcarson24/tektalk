@@ -4,7 +4,7 @@ const index = async (req, res) => {
   const user = await User.findByPk(req.session.user.id, {
     include: {
       model: Post,
-      as: 'posts'
+      as: 'posts',
     },
     order: [
       [{ model: Post, as: 'posts' }, 'createdAt', 'DESC']

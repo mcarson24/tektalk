@@ -6,6 +6,9 @@
       on {{format_time post.createdAt}}
     </div>
     <p>{{post.body}}</p>
+    {{#if_user_owns_post user.id post.user_id}}
+      <a href="{{post_edit_path ../post}}">Edit Post</a>
+    {{/if_user_owns_post}}
   </section>
   <section>
     {{#each post.comments as |comment|}}

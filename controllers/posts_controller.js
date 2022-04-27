@@ -32,13 +32,14 @@ const show = async (req, res) => {
 
   res.render('posts/show', {
     post: post.get({ plain: true }),
-    user: req.session.user
+    user: req.session.user,
+    post_edit_path: `/posts/${post.id}/edit`
   })
 }
 
 const store = async (req, res) => {
   const {title, body} = req.body
-  
+
   if (!title || !body) return res.redirect('/posts/create')
 
   const post = await Post.create({
@@ -50,4 +51,27 @@ const store = async (req, res) => {
   return res.redirect(`/posts/${post.id}`)
 }
 
-export default { create, show, store }
+// Make sure the user owns the post, otherwise they shouldn't be able to update it.
+const edit = async (req, res) => {
+  const post = await Post.findByPk(req.params.id)
+  console.log(post.path)
+  res.render('posts/edit', {
+    user: req.session.id,
+    post: post.get({ plain: true }),
+    post_path: `/posts/${post.id}`,
+  })
+}
+
+const update = async (req, res) => {
+  const post = await Post.update({
+    title: req.body.title,
+    body: req.body.body
+  }, { 
+    where: { 
+      id: req.params.id 
+    }
+  })
+  return res.redirect(`/posts/${req.params.id}/edit`)
+}
+
+export default { create, show, store, edit, update }
