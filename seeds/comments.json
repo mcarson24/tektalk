@@ -1,0 +1,17 @@
+[
+  {
+    "body": "First!!!",
+    "post_id": 1,
+    "user_id": 1
+  },
+  {
+    "body": "You make an interesting point",
+    "post_id": 1,
+    "user_id": 3
+  },
+  {
+    "body": "This makes no sense at all. Is this even English?",
+    "post_id": 3,
+    "user_id": 3
+  }
+]

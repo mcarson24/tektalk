@@ -8,6 +8,13 @@
     <p>{{post.body}}</p>
   </section>
   <section>
+    {{#each post.comments as |comment|}}
+      <div>{{comment.body}}</div>
+      <span>-{{comment.user.username}}</span>
+      <span class="italic">{{readable_time comment.createdAt}}</span>
+    {{/each}}
+  </section>
+  <section>
     <h3>Leave a comment:</h3>
     <form action="/posts/{{post.id}}/comments" method="POST">
       <div>
