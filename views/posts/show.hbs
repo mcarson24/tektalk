@@ -8,6 +8,9 @@
     <p>{{post.body}}</p>
     {{#if_user_owns_post user.id post.user_id}}
       <a href="{{post_edit_path ../post}}">Edit Post</a>
+      <form action="/posts/{{../post.id}}" method="POST" id="delete">
+        <input type="submit" value="Delete Post">
+      </form>
     {{/if_user_owns_post}}
   </section>
   <section>

@@ -10,6 +10,7 @@ document.querySelectorAll('.logout_form').forEach(el => {
 })
 
 const update_form = document.querySelector('.update_form')
+
 if (update_form) {
   update_form.addEventListener('submit', async e => {
     e.preventDefault()
@@ -27,5 +28,20 @@ if (update_form) {
       }),
     })
     location.replace(show_path)
+  })
+}
+
+const post_delete = document.querySelector('#delete')
+if (post_delete) {
+  post_delete.addEventListener('submit', async e => {
+    e.preventDefault()
+
+    const path = e.target.action.substring(e.target.action.indexOf('/posts'))
+
+    await fetch(path, {
+      method: 'DELETE'
+    })
+
+    location.replace('/dashboard')
   })
 }
