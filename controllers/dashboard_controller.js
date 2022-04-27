@@ -5,7 +5,10 @@ const index = async (req, res) => {
     include: {
       model: Post,
       as: 'posts'
-    }
+    },
+    order: [
+      [{ model: Post, as: 'posts' }, 'createdAt', 'DESC']
+    ]
   })
   user.posts = user.posts.map(post => post.get({ plain: true }))
   return res.render('dashboard', {
