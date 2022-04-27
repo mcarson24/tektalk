@@ -1,34 +1,45 @@
-<main>
+<main class="w-3/4">
   <section>
-    <h1 class="text-5xl">{{post.title}}</h1>
-    <div>
-      <h2>by: {{post.user.username}}</h2>
-      on {{format_time post.createdAt}}
-    </div>
-    <p>{{post.body}}</p>
+    <header class="text-center mb-4">
+      <h1 class="text-5xl text-indigo-700">{{post.title}}</h1>
+      <div>
+        <h2 class="text-indigo-900 font-bold">
+          by: {{post.user.username}}
+          <span class="italic">
+            on {{format_time post.createdAt}}
+          </span>
+        </h2>
+      </div>
+    </header>
+    <p class="py-6 px-3 bg-white rounded">{{post.body}}</p>
     {{#if_user_owns_post user.id post.user_id}}
-      <a href="{{post_edit_path ../post}}">Edit Post</a>
-      <form action="/posts/{{../post.id}}" method="POST" id="delete">
-        <input type="submit" value="Delete Post">
-      </form>
+      <div class="flex justify-end mb-2">
+        <a href="{{post_edit_path ../post}}" class="mt-2 bg-indigo-700 text-white py-2 px-2 mr-4 rounded">Edit Post</a>
+        <form action="/posts/{{../post.id}}" method="POST" id="delete" class="mt-2 bg-indigo-700 text-white py-2 px-2 rounded">
+          <input type="submit" value="Delete Post">
+        </form>
+      </div>
     {{/if_user_owns_post}}
-  </section>
-  <section>
+
     {{#each post.comments as |comment|}}
+    <div class="even:bg-white odd:bg-gray-200 py-3 px-2">
       <div>{{comment.body}}</div>
-      <span>-{{comment.user.username}}</span>
-      <span class="italic">{{readable_time comment.createdAt}}</span>
+      <div class="text-right">
+        <span class="font-bold">-{{comment.user.username}}</span>
+        <span class="italic">{{readable_time comment.createdAt}}</span>
+      </div>
+    </div>
     {{/each}}
   </section>
   {{#if user}}
-    <section>
-      <h3>Leave a comment:</h3>
-      <form action="/posts/{{post.id}}/comments" method="POST">
+    <section class="flex flex-col items-center justify-center my-3">
+      <h3 class="mb-2">What's on your mind?</h3>
+      <form action="/posts/{{post.id}}/comments" method="POST" class="w-1/2">
         <div>
-          <textarea name="body" cols="30" rows="10"></textarea>
+          <textarea name="body" cols="30" rows="10" class="w-full"></textarea>
         </div>
-        <div>
-          <input type="submit" value="Submit">
+        <div class="text-right">
+          <input type="submit" value="Submit" class="mt-2 bg-indigo-700 text-white py-2 px-2 rounded">
         </div>
       </form>
     </section>

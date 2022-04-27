@@ -20,9 +20,12 @@ const show = async (req, res) => {
           {
             model: User,
             as: 'user'
-          }
+          },
         ]
       }
+    ],
+    order: [
+      [{ model: Comment, as: 'comments' }, 'createdAt', 'DESC']
     ]
   })
 
