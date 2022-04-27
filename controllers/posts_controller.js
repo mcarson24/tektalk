@@ -54,7 +54,6 @@ const store = async (req, res) => {
 // Make sure the user owns the post, otherwise they shouldn't be able to update it.
 const edit = async (req, res) => {
   const post = await Post.findByPk(req.params.id)
-  console.log(post.path)
   res.render('posts/edit', {
     user: req.session.id,
     post: post.get({ plain: true }),
@@ -63,13 +62,11 @@ const edit = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const post = await Post.update({
+  const post = await Post.findByPk(req.params.id)
+  if (post.user_id !== req.session.user.id) return res.redirect('/dashboard')
+  await post.update({
     title: req.body.title,
     body: req.body.body
-  }, { 
-    where: { 
-      id: req.params.id 
-    }
   })
   return res.redirect(`/posts/${req.params.id}/edit`)
 }

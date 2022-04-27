@@ -7,7 +7,6 @@ const home = async (req, res) => {
       as: 'user'
     }
   })
-  console.log(posts)
   res.render('static/home', { 
     user: req.session.user,
     posts: posts.map(post => post.get({ plain: true }))
