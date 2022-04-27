@@ -1,11 +1,15 @@
-<div>
+<div class="w-3/4">
+  <h2 class="text-4xl mb-2 text-indigo-700">Recent Posts</h2>
   {{#if posts}}
-    <ul>
+    <ul class="flex flex-col bg-white rounded overflow-hidden">
       {{#each posts as |post| }}
-        <li>
+        <li class="px-2 py-8 odd:bg-gray-200">
           <h2>
-            <a href="/posts/{{post.id}}">{{post.title}}</a>
+            <a href="/posts/{{post.id}}" class="text-indigo-700">{{post.title}}</a>
             by {{post.user.username}}
+            <span class="italic">
+              {{readable_time post.createdAt}}
+            </span>
           </h2>
         </li>
       {{/each}}

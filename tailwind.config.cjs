@@ -1,7 +1,11 @@
 module.exports = {
   content: ['./views/**/*.hbs'],
   theme: {
-    extend: {},
+    extend: {
+      'fontFamily': {
+        'title': ['Anton']
+      }
+    },
   },
   plugins: [],
 }

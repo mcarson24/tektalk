@@ -1,18 +1,20 @@
-<main class="flex flex-col">
-  <h1 class="text-4xl">Your Posts</h1>
+<main class="flex flex-col justify-between w-1/2 min-h-screen">
+  <h1 class="text-4xl text-center text-indigo-700 mb-6">Your Posts</h1>
 
-  <section>
-    {{#each user.posts as |post| }}
-      <div class="flex">
-        <h3>
-          <a href="/posts/{{post.id}}">{{post.title}}</a>
-        </h3>
-        <h4 class="italic ml-3">{{readable_time post.createdAt}}</h4>
-      </div>
-      {{#if_user_owns_post post.user.id post.user_id}}
-        <a href="/posts/{{post.id}}/edit">Edit Post</a>
-      {{/if_user_owns_post}}
-    {{/each}}
+  <section class="min-h-screen">
+    <ul class="flex flex-col bg-white rounded overflow-hidden text-left">
+      {{#each user.posts as |post| }}
+        <li class="px-2 py-8 odd:bg-gray-200">
+        <div class="flex justify-between mb-4">
+          <h3>
+            <a href="/posts/{{post.id}}" class="font-bold">{{post.title}}</a>
+          </h3>
+          <a href="/posts/{{post.id}}/edit" class="bg-indigo-700 py-2 px-3 rounded text-white">Edit Post</a>
+        </div>
+        <p class="italic">{{readable_time post.createdAt}}</p>
+        </li>
+      {{/each}}
+    </ul>
   </section>
   <section>
     <a href="/posts/create">New Post</a>

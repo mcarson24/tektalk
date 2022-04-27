@@ -7,10 +7,13 @@
   <title>Document</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-  <div class="container mx-auto">
-    <header>
-      <nav class="flex justify-end">
+<body class="bg-cyan-700">
+  <header class="bg-white px--4">
+    <div class="container mx-auto py-2">
+      <nav class="flex justify-between items-center">
+        <h1 class="text-5xl font-title">
+          <span class="text-indigo-700">Tek</span><span class="text-cyan-700">Talk</span>
+        </h1>
         <div>
           <a href="/" class="mr-3">Home</a>
           <a href="/dashboard" class="mr-3">Dashboard</a>
@@ -22,8 +25,10 @@
           {{/if}}
         </div>
       </nav>
-    </header>
-    <div class="flex justify-center items-center min-h-screen">
+    </div>
+  </header>
+  <div class="container mx-auto my-2">
+    <div class="flex justify-center items-center">
       {{{body}}}
     </div>
   </div>
