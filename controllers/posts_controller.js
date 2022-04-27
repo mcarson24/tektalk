@@ -48,7 +48,7 @@ const store = async (req, res) => {
     user_id: req.session.user.id
   })
 
-  return res.redirect(`/posts/${post.id}`)
+  return res.redirect(`/dashboard`)
 }
 
 // Make sure the user owns the post, otherwise they shouldn't be able to update it.
