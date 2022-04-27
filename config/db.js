@@ -19,6 +19,6 @@ if (process.env.JAWSDB_URL) {
     }
   )
 }
-export default new Sequelize(db)
+export default db
 
 
