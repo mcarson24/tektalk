@@ -516,12 +516,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 0.5rem;
 }
 
-.flex {
-  display: flex;
+.mr-3 {
+  margin-right: 0.75rem;
 }
 
-.hidden {
-  display: none;
+.inline {
+  display: inline;
+}
+
+.flex {
+  display: flex;
 }
 
 .min-h-screen {
@@ -579,6 +583,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .text-white {

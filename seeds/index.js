@@ -1,24 +1,8 @@
 import User from '../models/User.js'
+import Post from '../models/Post.js'
 import sequelize from '../config/db.js'
-
-const users = [
-  {
-    username: 'frankiefasthands',
-    password: 'password'
-  },
-  {
-    username: 'hughhoney',
-    password: 'password'
-  },
-  {
-    username: 'vicvinegar',
-    password: 'password'
-  },
-  {
-    username: 'QueenOfThrones',
-    password: 'password'
-  }
-]
+import users from './users.json' assert { type: 'json' }
+import posts from './posts.json' assert { type: 'json' }
 
 const seed = async () => {
   await sequelize.sync({ force: true })
@@ -26,6 +10,10 @@ const seed = async () => {
     individualHooks: true
   })
   console.log('---USERS TABLE SEEDED---')
+  await Post.bulkCreate(posts, {
+    individualHooks: true
+  })
+  console.log('---POSTS TABLE SEEDED---')
 
   process.exit(0)
 }

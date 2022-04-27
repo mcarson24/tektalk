@@ -7,20 +7,19 @@ const login = async (req, res) => {
     const user = await User.findOne({ where: { username: req.body.username }})
 
     if (!user) {
-      res.redirect('/login')
-    
+      return res.redirect('/login')
     }
     // Compare the password with the hashed password stored for that user
     const valid = await user.isValid(req.body.password)
     if (!valid) {
       // TODO: Send flash message with validation errors.
-      res.redirect('/login')
+      return res.redirect('/login')
     }
 
     // If they match log in user (save in session)
     req.session.save(() => {
       req.session.user = user
-      return res.redirect('/')
+      return res.redirect('/dashboard')
     })
   } catch (err) {
     res.status(500).json(err)

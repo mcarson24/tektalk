@@ -1,0 +1,12 @@
+<main class="flex flex-col">
+  <h1 class="text-4xl">Your Posts</h1>
+
+  <section>
+    {{#each user.posts as |post| }}
+      <div class="flex">
+        <h3>{{post.title}}</h3>
+        <h4 class="italic">{{format_time post.createdAt}}</h4>
+      </div>
+    {{/each}}
+  </section>
+</main>
