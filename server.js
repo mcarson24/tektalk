@@ -6,6 +6,8 @@ import routes from './routes/index.js'
 import connection from './config/db.js'
 import { create } from 'express-handlebars'
 import connect from 'connect-session-sequelize'
+import dayjs from 'dayjs'
+import RelativeTime from 'dayjs/plugin/relativeTime.js'
 
 const SequelizeStore = connect(session.Store)
 
@@ -14,8 +16,15 @@ const __dirname = dirname(__filename)
 const PORT = 3001 || process.env.PORT
 const app = express()
 
+dayjs.extend(RelativeTime)
+
 const hbs = create({
-  extname: '.hbs'
+  extname: '.hbs',
+  helpers: {
+    format_time: (date) => {
+     return dayjs().to(dayjs(date))
+    },
+  }
 })
 
 app.use(session({
