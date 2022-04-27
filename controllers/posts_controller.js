@@ -19,12 +19,13 @@ const show = async (req, res) => {
       }
     ]
   })
-  console.log(post.comments)
+
   if (!post) return res.status(404)
   post.comments.map(comment => comment.get({ plain: true }))
 
   res.render('posts/show', {
-    post: post.get({ plain: true })
+    post: post.get({ plain: true }),
+    user: req.session.user
   })
 }
 
