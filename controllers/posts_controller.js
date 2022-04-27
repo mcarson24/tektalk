@@ -36,4 +36,18 @@ const show = async (req, res) => {
   })
 }
 
-export default { create, show }
+const store = async (req, res) => {
+  const {title, body} = req.body
+  
+  if (!title || !body) return res.redirect('/posts/create')
+
+  const post = await Post.create({
+    title,
+    body,
+    user_id: req.session.user.id
+  })
+
+  return res.redirect(`/posts/${post.id}`)
+}
+
+export default { create, show, store }
