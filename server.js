@@ -28,7 +28,8 @@ const hbs = create({
     if_user_owns_post: (one, two, options) => {
       return (one === two) ? options.fn(this) : options.inverse(this)
     },
-    post_edit_path: post => `/posts/${post.id}/edit`
+    post_edit_path: post => `/posts/${post.id}/edit`,
+    post_delete_path: post=> `posts/${post.id}`
   }
 })
 

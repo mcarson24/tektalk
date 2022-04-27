@@ -26,7 +26,7 @@ const show = async (req, res) => {
     ]
   })
 
-  if (!post) return res.status(404)
+  if (!post) return res.status(404).redirect('/')
 
   post.comments.map(comment => comment.get({ plain: true }))
 
@@ -71,4 +71,11 @@ const update = async (req, res) => {
   return res.redirect(`/posts/${req.params.id}/edit`)
 }
 
-export default { create, show, store, edit, update }
+const destroy = async (req, res) => {
+  console.log('here')
+  await Post.destroy({ where: { id: req.params.id }})
+
+  res.redirect('/dashboard')
+}
+
+export default { create, show, store, edit, update, destroy }

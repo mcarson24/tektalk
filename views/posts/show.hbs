@@ -1,36 +1,34 @@
-<main class="w-3/4">
-  <section class="text-center">
-    <header class="mb-4">
-      <h1 class="text-5xl text-indigo-700">{{post.title}}</h1>
-      <div class="flex justify-end text-indigo-900">
-        <h2 class="font-bold">by: {{post.user.username}}  <span class="font-normal italic">on {{format_time post.createdAt}}</span></h2>
-      </div>
-    </header>
-    <p class="bg-white mb-4 py-6 px-4 rounded">{{post.body}}</p>
+<main>
+  <section>
+    <h1 class="text-5xl">{{post.title}}</h1>
+    <div>
+      <h2>by: {{post.user.username}}</h2>
+      on {{format_time post.createdAt}}
+    </div>
+    <p>{{post.body}}</p>
+    {{#if_user_owns_post user.id post.user_id}}
+      <a href="{{post_edit_path ../post}}">Edit Post</a>
+      <form action="/posts/{{../post.id}}" method="POST" id="delete">
+        <input type="submit" value="Delete Post">
+      </form>
+    {{/if_user_owns_post}}
   </section>
-  <section class="rounded overflow-hidden mb-4">
+  <section>
     {{#each post.comments as |comment|}}
-      <div class="p-2 odd:bg-gray-200 bg-white">
-        <div class="mb-2">{{comment.body}}</div>
-        <span>- {{comment.user.username}}</span>
-        <span class="italic">{{readable_time comment.createdAt}}</span>
-      </div>
+      <div>{{comment.body}}</div>
+      <span>-{{comment.user.username}}</span>
+      <span class="italic">{{readable_time comment.createdAt}}</span>
     {{/each}}
   </section>
-  {{#if_user_owns_post user.id post.user_id}}
-    <div class="mb-2 text-right">
-      <a href="{{post_edit_path ../post}}" class="bg-indigo-700 py-2 px-3 rounded text-white">Edit Post</a>
-    </div>
-  {{/if_user_owns_post}}
   {{#if user}}
-    <section class="text-center">
-      <h3 class="mb-4">What are you thinking?</h3>
-      <form action="/posts/{{post.id}}/comments" method="POST" class="text-center">
+    <section>
+      <h3>Leave a comment:</h3>
+      <form action="/posts/{{post.id}}/comments" method="POST">
         <div>
-          <textarea name="body" rows="7" class="w-1/2 mb-4"></textarea>
+          <textarea name="body" cols="30" rows="10"></textarea>
         </div>
         <div>
-          <input type="submit" value="Submit" class="bg-indigo-700 py-2 px-3 rounded text-white">
+          <input type="submit" value="Submit">
         </div>
       </form>
     </section>
