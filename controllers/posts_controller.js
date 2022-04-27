@@ -1,5 +1,11 @@
 import { Comment, Post, User } from '../models/index.js'
 
+const create = (req, res) => {
+  res.render('posts/create', {
+    user: req.session.user
+  })
+}
+
 const show = async (req, res) => {
   const post = await Post.findByPk(req.params.id, {
     include: [
@@ -21,6 +27,7 @@ const show = async (req, res) => {
   })
 
   if (!post) return res.status(404)
+
   post.comments.map(comment => comment.get({ plain: true }))
 
   res.render('posts/show', {
@@ -29,4 +36,4 @@ const show = async (req, res) => {
   })
 }
 
-export default { show }
+export default { create, show }

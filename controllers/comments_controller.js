@@ -1,8 +1,6 @@
 import { Comment } from '../models/index.js'
 
-const create = async (req, res, post_id) => {
-  // if (!req.session.user) return res.redirect('/login')
-
+const store = async (req, res, post_id) => {
   await Comment.create({
     body: req.body.body,
     user_id: req.session.user.id,
@@ -12,4 +10,4 @@ const create = async (req, res, post_id) => {
   res.redirect(`/posts/${post_id}`)
 }
 
-export default { create }
+export default { store }

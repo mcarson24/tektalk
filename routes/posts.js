@@ -5,7 +5,9 @@ import { authorized } from '../utils/middleware.js'
 
 const router = express.Router()
 
+router.get('/create', authorized, (req, res) => posts_controller.create(req, res))
 router.get('/:id', (req, res) => posts_controller.show(req, res))
-router.post('/:id/comments', authorized, (req, res) => comments_controller.create(req, res, req.params.id))
+
+router.post('/:id/comments', authorized, (req, res) => comments_controller.store(req, res, req.params.id))
 
 export default router
