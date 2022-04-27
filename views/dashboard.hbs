@@ -5,7 +5,7 @@
     {{#each user.posts as |post| }}
       <div class="flex">
         <h3>{{post.title}}</h3>
-        <h4 class="italic">{{format_time post.createdAt}}</h4>
+        <h4 class="italic ml-3">{{readable_time post.createdAt}}</h4>
       </div>
     {{/each}}
   </section>

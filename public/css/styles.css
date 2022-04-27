@@ -520,13 +520,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.75rem;
 }
 
-<<<<<<< Updated upstream
 .ml-3 {
   margin-left: 0.75rem;
 }
 
-=======
->>>>>>> Stashed changes
 .inline {
   display: inline;
 }

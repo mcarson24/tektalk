@@ -8,6 +8,7 @@ import { create } from 'express-handlebars'
 import connect from 'connect-session-sequelize'
 import dayjs from 'dayjs'
 import RelativeTime from 'dayjs/plugin/relativeTime.js'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat.js'
 
 const SequelizeStore = connect(session.Store)
 
@@ -17,13 +18,13 @@ const PORT = process.env.PORT || 3001
 const app = express()
 
 dayjs.extend(RelativeTime)
+dayjs.extend(AdvancedFormat)
 
 const hbs = create({
   extname: '.hbs',
   helpers: {
-    format_time: (date) => {
-     return dayjs().to(dayjs(date))
-    },
+    readable_time: date => dayjs().to(dayjs(date)),
+    format_time: date => dayjs(date).format('dddd, MMMM Do, YYYY')
   }
 })
 
