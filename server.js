@@ -13,7 +13,7 @@ const SequelizeStore = connect(session.Store)
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const PORT = 3001 || process.env.PORT
+const PORT = process.env.PORT || 3001
 const app = express()
 
 dayjs.extend(RelativeTime)
